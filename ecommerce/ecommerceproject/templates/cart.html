@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+  This is Your Cart page!
+{% endblock %}
+
+{% block title %}
+  Cart - Picklez Palace PVT LTD
+{% endblock %}
+
+{% block content %}
+    {% if not cart_items %}
+    <div>
+        <div class="text-center">
+            <br>
+            <h1 class="text-center my_title">
+                Your Shopping Cart is Empty
+            </h1>
+            <br>
+            <p class="text-center">Please click <a href="{% url 'shopapp:allProdCat' %}">Here</a>to continue </p>
+        </div>
+    </div>
+    {% else %}
+    <div>
+        <div class="text-center">
+            <br>
+            <h1 class="text-center my_title">
+                Your Shopping Cart
+            </h1>
+            <br>
+        </div>
+    </div>
+    <div class="row mx_auto">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+            <table class="table my_custom_table">
+                <thead class="my_custom_head">
+                <tr>
+                    <th colspan="5">
+                        Your Items
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <a href="item.product.get_absolute_url"><img src="{{item.product.img.url}}" alt="" class="float-left-rounded custom_image" width="100px" height="100px;"></a>
+                        </td>
+                        <td class="text-left">
+                            {{item.product.name}}
+                            <br>
+                            PNM:{{item.product.id}}
+                            <br>
+                            Price:$ {{item.product.price}}
+                            <br>
+                            Qnt:{{item.quantity}} X ${{item}}
+                        </td>
+                        <td>
+                            $ {{item.sub_total}}
+                        </td>
+                        {% if item.quantity < item.product.stock %}
+                        <td>
+                            <a href="{% url 'cart:addcart' item.product.id %}" class="custom_a"><i class="fa fa-cart-plus custom_icon"></i></a>
+                            <a href="{% url 'cart:cart_remove' item.product.id %}" class="custom_a"><i class="fa fa-minus custom_icon"></i></a>
+                            <a href="{% url 'cart:full_remove' item.product.id %}" class="custom_a"><i class="fa fa-trash custom_icon"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a href="{% url 'cart:cart_remove' item.product.id %}" class="custom_a"><i class="fa fa-cart-minus custom_icon"></i></a>
+                            <a href="{% url 'cart:full_remove' item.product.id %}" class="custom_a"><i class="fa fa-trash custom_icon"></i></a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+            <table class="table my_custom_table">
+                <thead class="my_custom_thead">
+                <tr>
+                    <th>
+                        Check Out
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        Please Review Your Shopping Cart Details Before Proceeding with the payment.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">
+                        Your Total Amount is : <strong>{{total}}</strong>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="mx_auto">
+                <a href="{% url 'shopapp:allProdCat' %}" class="btn btn-secondary btn-block my_custom_button">
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
