@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Forms</title>
+</head>
+<body>
+    <h1>Saved Forms</h1>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Student ID</th>
+                <th scope="col">Student Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Department</th>
+      <th scope="col">Course</th>
+      <th scope="col">Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in saved_forms %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.name}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.date_of_birth}}</td>
+                <td>{{i.age}}</td>
+                <td>{{i.gender}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.phone_number}}</td>
+                <td>{{i.department}}</td>
+                <td>{{i.course}}%</td>
+                <td>{{i.purpose}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No saved forms yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

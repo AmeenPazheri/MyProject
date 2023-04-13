@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Success!</h1>
+    <p>{{ message }}</p>
+    <p><a href="{% url 'storeapp:index' %}">Return to home page</a></p>
+  </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- ABOUT -->
+     <section id="about">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-6 col-sm-12">
+                         <div class="about-info">
+                              <h2>Start your journey to a better life with online practical courses</h2>
+
+                              <figure>
+                                   <span><i class="fa fa-users"></i></span>
+                                   <figcaption>
+                                        <h3>Professional Trainers</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint ipsa voluptatibus.</p>
+                                   </figcaption>
+                              </figure>
+
+                              <figure>
+                                   <span><i class="fa fa-certificate"></i></span>
+                                   <figcaption>
+                                        <h3>International Certifications</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint ipsa voluptatibus.</p>
+                                   </figcaption>
+                              </figure>
+
+                              <figure>
+                                   <span><i class="fa fa-bar-chart-o"></i></span>
+                                   <figcaption>
+                                        <h3>Free for 3 months</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint ipsa voluptatibus.</p>
+                                   </figcaption>
+                              </figure>
+                         </div>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-4 col-sm-12">
+                         <div class="entry-form">
+                              <form  method="post">
+                                   <h2>Signin Now</h2>
+                                   {% csrf_token %}
+                                   <input type="text" name="username" class="form-control" placeholder="username" required="">
+                                   <input type="password" name="password" class="form-control" placeholder="Your password" required="">
+                                   <button class="submit-btn form-control" id="form-submit">Login</button>
+                                   <a href="{% url 'credentials:register' %}" style='color:white;'>If not Registered,Register Now</a>
+                              </form>
+                              <div id="message-box">
+                              {% for msg in messages %}
+                              <h5 style="color:red;">{{msg}}!!</h5>
+                              {% endfor %}
+                              </div>
+
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+{% endblock %}
