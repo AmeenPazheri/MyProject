@@ -1,0 +1,58 @@
+
+<title>home page</title>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+         <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>Vehicle List</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 >Vehicle List</h4>
+<div class="card border-info mb-12" style="max-width: 80rem;">
+    <div class="row">
+        <div class="col-md-12">
+
+            {% for vehicle in Vehicles %}
+            <div class="shadow card">
+                <div style="">
+                    <div class="card-header"><b>Vehicle Number:{{ vehicle.vehicle_number}}</b></div>
+                    <div class="card-body text-info">
+                    <p class="card-text">Vehicle Type:{{ vehicle.vehicle_type}}</p>
+                    <p class="card-text">Vehicle Model:{{ vehicle.vehicle_model}}</p>
+                    <p class="card-text">Vehicle Description:{{ vehicle.vehicle_description}}</p>
+                    </div>
+                    {% if user.is_authenticated %}
+                    {% if 'S' == user.user_type or 'A' == user.user_type  %}
+                    <a class="btn btn-danger" href="{% url 'vehapp:read_update' vehicle.id  %}">Update</a>
+                        {% if 'S' == user.user_type  %}
+                    <a class="btn btn-success" href="{% url 'vehapp:delete' vehicle.id  %}">Delete</a>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% empty %}
+                    <div class="alert alert-danger" role="alert">
+                        No vehicles found.!
+                    </div>
+
+
+
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{{message}}
+ {% if user.is_authenticated %}
+<div><a href="{% url 'vehapp:create' %}" class="btn btn-secondary">Add Vehicle</a></div>
+  {% endif %}
+
+{% endblock %}
+
